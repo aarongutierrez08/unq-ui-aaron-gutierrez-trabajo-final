@@ -5,7 +5,6 @@ import { colocarBarcosAleatoriamente } from '../utils/utils';
 const Game = () => {
   const [tableroJugador, setTableroJugador] = useState([]);
   const [tableroMaquina, setTableroMaquina] = useState([]);
-  const [barcosRestantes, setBarcosRestantes] = useState(4);
 
   useEffect(() => {
     const tableroInicial = Array.from({ length: 10 }, () =>
@@ -29,18 +28,10 @@ const Game = () => {
     const nuevoTableroJugador = [...tableroJugador];
     if (ataqueExitoso) {
       nuevoTableroJugador[fila][columna] = 'X';
-      setBarcosRestantes(prevBarcos => prevBarcos - 1);
     } else {
       nuevoTableroJugador[fila][columna] = '-';
     }
     setTableroJugador(nuevoTableroJugador);
-
-    // Verificar si todos los barcos fueron hundidos
-    if (barcosRestantes === 0) {
-      // Aquí puedes definir el final del juego, por ejemplo:
-      alert('¡Has hundido todos los barcos! ¡Ganaste!');
-      // Aquí puedes reiniciar el juego o realizar alguna acción posterior al final del juego
-    }
   };
 
 
