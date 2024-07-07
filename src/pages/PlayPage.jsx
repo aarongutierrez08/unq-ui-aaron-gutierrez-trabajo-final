@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react"
 import { getDifficulty } from "../api/service"
 import "./PlayPage.css"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
-const INITIAL_STATE = { username: '' }
+// const INITIAL_STATE = { username: '' }
 
 const PlayPage = () => {
     const [difficulties, setDifficulties] = useState([])
     const [difficulty, setDifficulty] = useState("")
-    const [values, setValues] = useState(INITIAL_STATE)
+    const location = useLocation()
+    const [values, setValues] = useState({ username: `${location?.state?.username ? location?.state?.username : ''}` })
     const navigate = useNavigate()
 
     const handleChange = (e) => {

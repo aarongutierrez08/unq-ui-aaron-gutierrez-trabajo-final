@@ -1,8 +1,3 @@
-.section-container {
-    height: 100vh;
-    background-color: bisque;
-}
-
 .options-container{
     display: flex;
     flex-direction: column;
