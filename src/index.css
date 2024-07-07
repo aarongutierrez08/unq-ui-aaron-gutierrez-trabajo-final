@@ -1,4 +1,17 @@
+body {
+    color: beige;
+}
+
 .section-container {
     height: 100vh;
     background-color: #272754;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.bold-text {
+    font-weight: bold;
+    display: block;
 }

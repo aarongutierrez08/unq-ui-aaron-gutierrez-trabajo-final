@@ -1,13 +1,21 @@
-import { useLocation, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import './WelcomePage.css'
 
 const WelcomePage = () => {
-    const location = useLocation()
     const navigate = useNavigate()
+
+    const handleNavigateToPlay = () => {
+        navigate("/play")
+    }
 
     return (
         <div className="section-container">
-            <p>{location?.state?.username} obtuviste respuestas correctas: {location?.state?.correctQuestions} de 10 preguntas</p>
-            <button onClick={() => navigate("/play", { state: { username: location?.state?.username } })}>Volver a jugar</button>
+            <div className="welcome-text">
+                Welcome to <span className="bold-text">TriviaPolis</span>
+            </div>
+            <div className="play-button-container">
+                <button className="play-button bold-text" onClick={handleNavigateToPlay}>Play</button>
+            </div>
         </div>
     )
 }

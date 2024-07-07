@@ -14,7 +14,7 @@ const App = () => {
         <Route path="/play" element={<PlayPage />} />
         <Route path="/game" element={<GamePage />} />
         <Route path="/finish" element={<FinishPage />} />
-        <Route path="*" element={<Navigate to="/play" replace />} />
+        <Route path="*" element={<Navigate to="/welcome" replace />} />
       </Routes>
       <ToastContainer position="top-right" transition={Slide} />
     </BrowserRouter>
