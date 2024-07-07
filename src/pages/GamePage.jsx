@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { answerQuestion, getQuestionsByDifficulty } from "../api/service"
-import "./PlayPage.css"
+import "./GamePage.css"
 import { Navigate, useLocation, useNavigate } from "react-router-dom"
 
 
@@ -82,11 +82,21 @@ const GamePage = () => {
 
     return (
         <div className="section-container">
-            <div>{currentQuestion?.question}</div>
-            <button disabled={selectedOption || countDown <= 0} onClick={() => setSelectedOption("option1")} style={{ backgroundColor: `${correctOption?.option === "option1" ? (correctOption?.isCorrect ? 'green' : 'red') : ''}` }}>{currentQuestion?.option1}</button>
-            <button disabled={selectedOption || countDown <= 0} onClick={() => setSelectedOption("option2")} style={{ backgroundColor: `${correctOption?.option === "option2" ? (correctOption?.isCorrect ? 'green' : 'red') : ''}` }}>{currentQuestion?.option2}</button>
-            <button disabled={selectedOption || countDown <= 0} onClick={() => setSelectedOption("option3")} style={{ backgroundColor: `${correctOption?.option === "option3" ? (correctOption?.isCorrect ? 'green' : 'red') : ''}` }}>{currentQuestion?.option3}</button>
-            <button disabled={selectedOption || countDown <= 0} onClick={() => setSelectedOption("option4")} style={{ backgroundColor: `${correctOption?.option === "option4" ? (correctOption?.isCorrect ? 'green' : 'red') : ''}` }}>{currentQuestion?.option4}</button>
+            <div className="user">User: {location?.state?.username}</div>
+            <div className="header-text">
+                <div className="difficulty-text">Difficulty: <span className="difficulty-choosen">{location?.state?.difficulty}</span></div>
+                <div className="question">{currentQuestion?.question}</div>
+            </div>
+            <div className="options-container">
+                <div className="options-row">
+                    <button className="option" disabled={selectedOption || countDown <= 0} onClick={() => setSelectedOption("option1")} style={{ backgroundColor: `${correctOption?.option === "option1" ? (correctOption?.isCorrect ? 'green' : 'red') : ''}` }}>{currentQuestion?.option1}</button>
+                    <button className="option" disabled={selectedOption || countDown <= 0} onClick={() => setSelectedOption("option2")} style={{ backgroundColor: `${correctOption?.option === "option2" ? (correctOption?.isCorrect ? 'green' : 'red') : ''}` }}>{currentQuestion?.option2}</button>
+                </div>
+                <div className="options-row">
+                    <button className="option" disabled={selectedOption || countDown <= 0} onClick={() => setSelectedOption("option3")} style={{ backgroundColor: `${correctOption?.option === "option3" ? (correctOption?.isCorrect ? 'green' : 'red') : ''}` }}>{currentQuestion?.option3}</button>
+                    <button className="option" disabled={selectedOption || countDown <= 0} onClick={() => setSelectedOption("option4")} style={{ backgroundColor: `${correctOption?.option === "option4" ? (correctOption?.isCorrect ? 'green' : 'red') : ''}` }}>{currentQuestion?.option4}</button>
+                </div>
+            </div>
             <div>{countDown <= 0 ? 0 : countDown}</div>
             <div>correctas {correctQuestions} de {questionNumber}/{questions.length}</div>
         </div>

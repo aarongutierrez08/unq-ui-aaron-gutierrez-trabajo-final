@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom"
-
+import "./FinishPage.css"
 
 const FinishPage = () => {
     const location = useLocation()
@@ -7,8 +7,10 @@ const FinishPage = () => {
 
     return (
         <div className="section-container">
-            <p>{location?.state?.username} obtuviste respuestas correctas: {location?.state?.correctQuestions} de 10 preguntas</p>
-            <button onClick={() => navigate("/play", { state: { username: location?.state?.username } })}>Volver a jugar</button>
+            <div className="result-text">{location?.state?.username} obtuviste respuestas correctas: {location?.state?.correctQuestions} de 10 preguntas</div>
+            <div className="play-againg-button-container">
+                <button className="play-againg-button" onClick={() => navigate("/play", { state: { username: location?.state?.username } })}>Play again</button>
+            </div>
         </div>
     )
 }

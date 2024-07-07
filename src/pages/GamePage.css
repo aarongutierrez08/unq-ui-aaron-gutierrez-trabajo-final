@@ -1,10 +1,58 @@
-.options-container{
+.user {
+    position: absolute;
+    left: 0;
+    font-size: 28px;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.header-text {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    height: 20%;
+    margin-top: 15px;
+    padding: 20px;
+    text-align: center;
+    gap: 10px;
+}
+
+.difficulty-text {
+    font-size: 36px;
+}
+
+.difficulty-choosen {
+    font-size: 48px;
+    text-transform: uppercase;
+}
+
+.question {
+    font-size: 24px;
+    padding: 20px;
+}
+
+.options-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    height: 80%;
+    padding-top: 75px;
     gap: 20px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.options-row {
+    display: flex;
+    width: 100%;
+    gap: 50px;
 }
 
 .option {
     background-color: rgb(255, 241, 196);
     padding: 20px;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 36px;
 }

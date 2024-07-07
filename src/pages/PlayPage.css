@@ -1,10 +1,35 @@
-.options-container{
+.choose-username {
     display: flex;
+    justify-content: flex-end;
     flex-direction: column;
-    gap: 20px;
+    height: 20%;
+    font-size: 24px;
+    padding: 20px;
+    text-align: center;
 }
 
-.option {
+.choose-username input{
+    font-size: 18px;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.difficulties-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+    padding-top: 75px;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.difficulty {
     background-color: rgb(255, 241, 196);
     padding: 20px;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 36px;
 }

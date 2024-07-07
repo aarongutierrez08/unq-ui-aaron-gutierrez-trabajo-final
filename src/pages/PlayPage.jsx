@@ -40,21 +40,23 @@ const PlayPage = () => {
 
     return (
         <form className="section-container" onSubmit={handleSubmit}>
-            <label className='form-label' htmlFor="username">Choose your username</label>
-            <input
-                className="form-input"
-                type="text"
-                id="username"
-                name="username"
-                placeholder="username"
-                value={values.username}
-                onChange={handleChange}
-                required
-            />
-            <div className="options-container">
+            <div className="choose-username">
+                <label className='form-label' htmlFor="username">Choose your username</label>
+                <input
+                    className="form-input"
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="username"
+                    value={values.username}
+                    onChange={handleChange}
+                    required
+                />
+            </div>
+            <div className="difficulties-container">
                 {difficulties.map(difficulty => {
                     return (
-                        <button key={difficulty} type="submit" onClick={() => setDifficulty(difficulty)}>{difficulty}</button>
+                        <button className="difficulty" key={difficulty} type="submit" onClick={() => setDifficulty(difficulty)}>{difficulty}</button>
                     )
                 })}
             </div>
