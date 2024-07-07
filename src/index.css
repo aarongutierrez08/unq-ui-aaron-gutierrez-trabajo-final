@@ -1,5 +1,5 @@
 body {
-    color: beige;
+    color: white;
 }
 
 .section-container {
@@ -14,4 +14,29 @@ body {
 .bold-text {
     font-weight: bold;
     display: block;
+}
+
+button {
+    background-color: #f0a818;
+    color: #272754;
+    border: none;
+    flex-wrap: wrap;
+}
+
+button:hover {
+    background-color: #272754;
+    color: #f0a818;
+    border: solid 1px #f0a818;
+}
+
+button:active {
+    background-color: #272754;
+    color: beige;
+    border: solid 1px beige;
+}
+
+@media (max-width: 300px) {
+    .section-container {
+        overflow-y: scroll;
+    }
 }

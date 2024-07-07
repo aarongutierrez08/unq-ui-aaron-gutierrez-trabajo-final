@@ -40,7 +40,7 @@ const PlayPage = () => {
 
     return (
         <form className="section-container" onSubmit={handleSubmit}>
-            <div className="choose-username">
+            <div className="choose">
                 <label className='form-label' htmlFor="username">Choose your username</label>
                 <input
                     className="form-input"
@@ -52,6 +52,7 @@ const PlayPage = () => {
                     onChange={handleChange}
                     required
                 />
+                <div>Choose the difficulty</div>
             </div>
             <div className="difficulties-container">
                 {difficulties.map(difficulty => {
