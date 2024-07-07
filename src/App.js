@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom" 
+import { ToastContainer, Slide } from "react-toastify" 
+import 'react-toastify/dist/ReactToastify.css' 
+import PlayPage from "./pages/PlayPage"
+import GamePage from "./pages/GamePage"
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <BrowserRouter>
+      <Routes>
+        <Route path="/play" element={<PlayPage />} />
+        <Route path="/game" element={<GamePage />} />
+        <Route path="*" element={<Navigate to="/play" replace />} />
+      </Routes>
+      <ToastContainer position="top-right" transition={Slide} />
+    </BrowserRouter>
+  ) 
+} 
 
-export default App;
+export default App 
