@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { getDifficulty } from "../api/service"
 import "./PlayPage.css"
 import { useLocation, useNavigate } from "react-router-dom"
+import { BeatLoader } from "react-spinners"
 
 // const INITIAL_STATE = { username: '' }
 
@@ -10,6 +11,7 @@ const PlayPage = () => {
     const [difficulty, setDifficulty] = useState("")
     const location = useLocation()
     const [values, setValues] = useState({ username: `${location?.state?.username ? location?.state?.username : ''}` })
+    const [loading, setLoading] = useState(true)
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -31,6 +33,8 @@ const PlayPage = () => {
             setDifficulties(difficulties)
         } catch (error) {
             console.error(error)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -55,11 +59,16 @@ const PlayPage = () => {
                 <div>Choose the difficulty</div>
             </div>
             <div className="difficulties-container">
-                {difficulties.map(difficulty => {
-                    return (
-                        <button className="difficulty" key={difficulty} type="submit" onClick={() => setDifficulty(difficulty)}>{difficulty}</button>
-                    )
-                })}
+                {loading 
+                    ? <BeatLoader color="#f0a818" loading={loading} size={50} />
+                    : <>
+                        {difficulties.map(difficulty => {
+                            return (
+                                <button className="difficulty" key={difficulty} type="submit" onClick={() => setDifficulty(difficulty)}>{difficulty}</button>
+                            )
+                        })}
+                    </>
+                }
             </div>
         </form>
     )
