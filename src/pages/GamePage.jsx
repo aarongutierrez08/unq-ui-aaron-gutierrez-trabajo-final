@@ -116,8 +116,19 @@ const GamePage = () => {
                     <button className="option" disabled={selectedOption || countDown <= 0} onClick={() => handleSelectOption("option4")} style={correctOption === "option4" ? optionStyle : {}}>{currentQuestion?.option4}</button>
                 </div>
             </div>
-            <div>{countDown <= 0 ? 0 : countDown}</div>
-            <div>correctas {correctQuestions} de {questionNumber}/{questions.length}</div>
+            <div className={`countdown ${countDown <= 5 ? "five-less" : ""}`}>
+                <div>
+                    {countDown <= 0 ? 0 : countDown}
+                </div>
+            </div>
+            <div className="stats">
+                <div>
+                    Corrects: <span>{correctQuestions}</span>
+                </div>
+                <div>
+                    <span>{questionNumber}/{questions.length}</span>
+                </div>
+            </div>
         </div>
     )
 }

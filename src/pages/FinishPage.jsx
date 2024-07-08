@@ -7,7 +7,24 @@ const FinishPage = () => {
 
     return (
         <div className="section-container">
-            <div className="result-text">{location?.state?.username} obtuviste respuestas correctas: {location?.state?.correctQuestions} de 10 preguntas</div>
+            <div className="text-container">
+                <div className="user-finish">{location?.state?.username}</div>
+                <div className="result-text">
+                    {
+                        location?.state?.correctQuestions < 5 
+                        ? (
+                        <>
+                            OH, you nailed <span>{location?.state?.correctQuestions}/{location?.state?.totalQuestions}</span> questions!
+                        </>
+                        ) 
+                        : (
+                        <>
+                            CONGRATS, you nailed <span>{location?.state?.correctQuestions} / {location?.state?.totalQuestions}</span> questions!
+                        </>
+                        )
+                    }
+                </div>
+            </div>
             <div className="play-againg-button-container">
                 <button className="play-againg-button" onClick={() => navigate("/play", { state: { username: location?.state?.username } })}>Play again</button>
             </div>
