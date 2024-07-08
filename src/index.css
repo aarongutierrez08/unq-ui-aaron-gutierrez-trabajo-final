@@ -1,5 +1,10 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     color: white;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .section-container {
@@ -9,6 +14,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    overflow-y: auto;
 }
 
 .bold-text {
@@ -20,6 +26,7 @@ button {
     background-color: #f0a818;
     color: #272754;
     border: none;
+    border-radius: 10px;
     flex-wrap: wrap;
 }
 
@@ -36,7 +43,12 @@ button:active {
 }
 
 @media (max-width: 300px) {
-    .section-container {
-        overflow-y: scroll;
+    button {
+        padding: 10px;
+        width: 95%;
+    }
+
+    * {
+        overflow-wrap: anywhere;
     }
 }
