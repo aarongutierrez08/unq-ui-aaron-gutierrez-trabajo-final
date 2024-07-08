@@ -5,16 +5,20 @@
 }
 
 .user-finish {
-    font-weight: bold;
-    color: #f0a818;
-    font-size: 40px;
+    font-size: 48px;
     text-align: center;
     margin-top: 50px;
     margin-bottom: 25px;
 }
 
+.user-finish span {
+    font-weight: bold;
+    font-size: 60px;
+    color: #f0a818;
+}
+
 .result-text {
-    font-size: 36px;
+    font-size: 48px;
     text-align: center;
 }
 
@@ -34,7 +38,7 @@
 }
 
 .play-againg-button {
-    width: 100%;
+    width: 70%;
     font-size: 36px;
     padding: 20px;
 }

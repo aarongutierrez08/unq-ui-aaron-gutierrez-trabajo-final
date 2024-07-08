@@ -8,21 +8,12 @@ const FinishPage = () => {
     return (
         <div className="section-container">
             <div className="text-container">
-                <div className="user-finish">{location?.state?.username}</div>
+                <div className="user-finish">
+                    {location?.state?.correctQuestions < 5 ? (<>Oh, </>) : (<>Congrats, </>)}
+                    <span>{location?.state?.username}</span>
+                </div>
                 <div className="result-text">
-                    {
-                        location?.state?.correctQuestions < 5 
-                        ? (
-                        <>
-                            OH, you nailed <span>{location?.state?.correctQuestions}/{location?.state?.totalQuestions}</span> questions!
-                        </>
-                        ) 
-                        : (
-                        <>
-                            CONGRATS, you nailed <span>{location?.state?.correctQuestions} / {location?.state?.totalQuestions}</span> questions!
-                        </>
-                        )
-                    }
+                    you nailed <span>{location?.state?.correctQuestions}/{location?.state?.totalQuestions}</span> questions!
                 </div>
             </div>
             <div className="play-againg-button-container">

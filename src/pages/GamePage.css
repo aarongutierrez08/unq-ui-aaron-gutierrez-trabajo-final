@@ -33,21 +33,28 @@
 }
 
 .question {
+    display: flex;
+    align-items: center;
+    text-align: center;
     border: 1px solid beige;
     border-radius: 10px;
     font-size: 24px;
-    padding: 20px;
+    padding: 10px 15px;
     width: 100%;
+    margin-top: 15px;
+    min-height: 205px;
+    flex-grow: 1;
 }
 
 .options-container {
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
     gap: 20px;
     width: 100%;
     padding: 20px;
-    padding-top: 25px;
+    flex-grow: 1;
 }
 
 .options-row {
@@ -92,7 +99,7 @@
     padding: 0 20px;
     flex-grow: 1;
     align-items: flex-end;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .stats div span {
@@ -127,7 +134,8 @@
     .option {
         font-size: 18px;
         min-width: auto;
-        height: 100px;
+        height: 75px;
+        padding: 15px;
     }
 
     .countdown {
