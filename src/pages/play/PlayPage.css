@@ -41,6 +41,7 @@
 .error-difficulties {
     color: red;
     font-size: 24px;
+    text-align: center;
 }
 
 @media (max-width: 450px) {
