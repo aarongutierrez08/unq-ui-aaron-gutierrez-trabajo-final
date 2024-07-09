@@ -1,16 +1,25 @@
 import { useEffect, useState } from "react"
-import { answerQuestion, getQuestionsByDifficulty } from "../api/service"
+import { answerQuestion, getQuestionsByDifficulty } from "../../api/service"
 import "./GamePage.css"
 import { Navigate, useLocation, useNavigate } from "react-router-dom"
-import { BeatLoader } from "react-spinners"
+import LoaderContainer from "../../components/LoaderContainer"
+import Countdown from "../../components/Countdown"
+
+const INITIAL_COUNTDOWN = 60
+
+const ACTIVE_OPTION_STYLE = {
+    backgroundColor: '#272754',
+    color: 'white',
+    border: '1px solid white'
+}
 
 const GamePage = () => {
     const [questions, setQuestions] = useState([])
     const [currentQuestion, setCurrentQuestion] = useState()
-    const [questionNumber, setQuestionNumber] = useState(6)
+    const [questionNumber, setQuestionNumber] = useState(0)
     const [correctOption, setCorrectOption] = useState()
     const [selectedOption, setSelectedOption] = useState("")
-    const [countDown, setCountdown] = useState(30)
+    const [countDown, setCountdown] = useState(INITIAL_COUNTDOWN)
     const [correctQuestions, setCorrectQuestions] = useState(0)
     const [optionStyle, setOptionStyle] = useState({})
     const [loading, setLoading] = useState(true)
@@ -34,12 +43,15 @@ const GamePage = () => {
             nextQuestion()
         }
 
-        const intervalId = setInterval(() => {
-            setCountdown(prevState => selectedOption ? prevState : prevState - 1)
-        }, 1000)
+        let intervalId
+        if (questions.length > 0) {
+            intervalId = setInterval(() => {
+                setCountdown(prevState => selectedOption ? prevState : prevState - 1)
+            }, 1000)
+        }
 
         return () => clearInterval(intervalId)
-    }, [countDown, correctOption])
+    }, [countDown, correctOption, questions])
     
     if (!location?.state?.difficulty || !location?.state?.username) {
         return (
@@ -64,13 +76,7 @@ const GamePage = () => {
         try {
             const answerValidation = await answerQuestion({ questionId: currentQuestion.id, option: selectedOption })
             setCorrectOption(selectedOption)
-            setOptionStyle(
-                {
-                    backgroundColor: `${answerValidation.answer ? 'green' : 'red'}`,
-                    color: 'white',
-                    border: '1px solid white'
-                }
-            )
+            setOptionStyle(prevState => { return { ...prevState, backgroundColor: `${answerValidation.answer ? 'green' : 'red'}` }})
             if (answerValidation.answer) setCorrectQuestions(prevState => prevState + 1)
         } catch (error) {
             console.error(error)
@@ -86,49 +92,39 @@ const GamePage = () => {
                 setCurrentQuestion(questions[questionNumber])
                 setQuestionNumber(prevState => prevState + 1)
                 setCorrectOption("")
-                setCountdown(30)
+                setCountdown(INITIAL_COUNTDOWN)
             }
         }, 1500);
     }
 
     const handleSelectOption = (option) => {
-        setOptionStyle(
-            {
-                backgroundColor: '#272754',
-                color: 'white',
-                border: '1px solid white'
-            }
-        )
+        setOptionStyle(ACTIVE_OPTION_STYLE)
         setSelectedOption(option)
     }
 
     return (
         <div className="section-container">
-            <div className="user">User: <span>{location?.state?.username}</span></div>
-            <div className="header-text">
+            <div className="header">
+                <div className="user">User: <span>{location?.state?.username}</span></div>
+                <button className="exit-button" onClick={() => navigate("/play", { state: { username: location?.state?.username }, replace: true })}>Salir</button>
+            </div>
+            <div className="header-text-center">
                 <div className="difficulty-text">Difficulty: <span className="difficulty-chosen">{location?.state?.difficulty}</span></div>
                 <div className="question">{currentQuestion?.question}</div>
             </div>
             <div className="options-container">
-                {loading 
-                    ? <BeatLoader color="#f0a818" loading={loading} size={50} />
-                    : <>
-                        <div className="options-row">
-                            <button className="option" disabled={selectedOption || countDown <= 0} onClick={() => handleSelectOption("option1")} style={selectedOption === "option1" ? optionStyle : {}}>{currentQuestion?.option1}</button>
-                            <button className="option" disabled={selectedOption || countDown <= 0} onClick={() => handleSelectOption("option2")} style={selectedOption === "option2" ? optionStyle : {}}>{currentQuestion?.option2}</button>
-                        </div>
-                        <div className="options-row">
-                            <button className="option" disabled={selectedOption || countDown <= 0} onClick={() => handleSelectOption("option3")} style={selectedOption === "option3" ? optionStyle : {}}>{currentQuestion?.option3}</button>
-                            <button className="option" disabled={selectedOption || countDown <= 0} onClick={() => handleSelectOption("option4")} style={selectedOption === "option4" ? optionStyle : {}}>{currentQuestion?.option4}</button>
-                        </div>
-                    </>
-                }
+                <LoaderContainer showLoading={loading}>
+                    <div className="options-row">
+                        <button className="option" disabled={selectedOption || countDown <= 0} onClick={() => handleSelectOption("option1")} style={selectedOption === "option1" ? optionStyle : {}}>{currentQuestion?.option1}</button>
+                        <button className="option" disabled={selectedOption || countDown <= 0} onClick={() => handleSelectOption("option2")} style={selectedOption === "option2" ? optionStyle : {}}>{currentQuestion?.option2}</button>
+                    </div>
+                    <div className="options-row">
+                        <button className="option" disabled={selectedOption || countDown <= 0} onClick={() => handleSelectOption("option3")} style={selectedOption === "option3" ? optionStyle : {}}>{currentQuestion?.option3}</button>
+                        <button className="option" disabled={selectedOption || countDown <= 0} onClick={() => handleSelectOption("option4")} style={selectedOption === "option4" ? optionStyle : {}}>{currentQuestion?.option4}</button>
+                    </div>
+                </LoaderContainer>
             </div>
-            <div className={`countdown ${countDown <= 5 ? "five-less" : ""}`}>
-                <div>
-                    {countDown <= 0 ? 0 : countDown}
-                </div>
-            </div>
+            <Countdown current={countDown} />
             <div className="stats">
                 <div>
                     Corrects: <span>{correctQuestions}</span>

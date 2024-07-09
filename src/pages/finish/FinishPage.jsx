@@ -1,9 +1,15 @@
-import { useLocation, useNavigate } from "react-router-dom"
+import { Navigate, useLocation, useNavigate } from "react-router-dom"
 import "./FinishPage.css"
 
 const FinishPage = () => {
     const location = useLocation()
     const navigate = useNavigate()
+
+    if (!location?.state?.correctQuestions || !location?.state?.totalQuestions) {
+        return (
+            <Navigate to="/play" replace={true} />
+        )
+    }
 
     return (
         <div className="section-container">

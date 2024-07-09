@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react"
-import { getDifficulty } from "../api/service"
+import { getDifficulty } from "../../api/service"
 import "./PlayPage.css"
 import { useLocation, useNavigate } from "react-router-dom"
-import { BeatLoader } from "react-spinners"
-
-// const INITIAL_STATE = { username: '' }
+import LoaderContainer from "../../components/LoaderContainer"
 
 const PlayPage = () => {
     const [difficulties, setDifficulties] = useState([])
@@ -54,21 +52,19 @@ const PlayPage = () => {
                     placeholder="username"
                     value={values.username}
                     onChange={handleChange}
+                    maxLength={10}
                     required
                 />
                 <div>Choose the difficulty</div>
             </div>
             <div className="difficulties-container">
-                {loading 
-                    ? <BeatLoader color="#f0a818" loading={loading} size={50} />
-                    : <>
-                        {difficulties.map(difficulty => {
-                            return (
-                                <button className="difficulty" key={difficulty} type="submit" onClick={() => setDifficulty(difficulty)}>{difficulty}</button>
-                            )
-                        })}
-                    </>
-                }
+            <LoaderContainer showLoading={loading}>
+                {difficulties.map(difficulty => {
+                    return (
+                        <button className="difficulty" key={difficulty} type="submit" onClick={() => setDifficulty(difficulty)}>{difficulty}</button>
+                    )
+                })}
+            </LoaderContainer>
             </div>
         </form>
     )

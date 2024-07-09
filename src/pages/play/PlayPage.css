@@ -24,7 +24,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 75px;
     gap: 20px;
     width: 100%;
     padding: 20px;
@@ -39,7 +38,7 @@
     font-weight: bold;
 }
 
-@media (max-width: 300px) {
+@media (max-width: 450px) {
     .choose {
         justify-content: flex-start;
         align-items: center;

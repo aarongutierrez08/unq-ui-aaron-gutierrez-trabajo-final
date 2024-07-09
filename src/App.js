@@ -1,10 +1,10 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom" 
 import { ToastContainer, Slide } from "react-toastify" 
 import 'react-toastify/dist/ReactToastify.css' 
-import PlayPage from "./pages/PlayPage"
-import GamePage from "./pages/GamePage"
-import FinishPage from "./pages/FinishPage"
-import WelcomePage from "./pages/WelcomePage"
+import PlayPage from "./pages/play/PlayPage"
+import GamePage from "./pages/game/GamePage"
+import FinishPage from "./pages/finish/FinishPage"
+import WelcomePage from "./pages/welcome/WelcomePage"
 
 const App = () => {
   return (
