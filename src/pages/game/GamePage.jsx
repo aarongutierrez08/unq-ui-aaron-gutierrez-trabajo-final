@@ -5,7 +5,6 @@ import "./GamePage.css"
 import { Navigate, useLocation, useNavigate } from "react-router-dom"
 import LoaderContainer from "../../components/LoaderContainer"
 import Countdown from "../../components/Countdown"
-import { toast } from 'react-toastify';
 
 const INITIAL_COUNTDOWN = 60
 
@@ -29,7 +28,7 @@ const GamePage = () => {
     const location = useLocation()
 
     useEffect(() => {
-        if (location?.state) {
+        if (location?.state?.difficulty && location?.state?.username) {
             getQuestions()
         }
     }, [])
