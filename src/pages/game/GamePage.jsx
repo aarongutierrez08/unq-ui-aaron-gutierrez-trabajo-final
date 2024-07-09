@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react"
 import { answerQuestion, getQuestionsByDifficulty } from "../../api/service"
 import "./GamePage.css"
 import { Navigate, useLocation, useNavigate } from "react-router-dom"
 import LoaderContainer from "../../components/LoaderContainer"
 import Countdown from "../../components/Countdown"
+import { toast } from 'react-toastify';
 
 const INITIAL_COUNTDOWN = 60
 
@@ -27,7 +29,7 @@ const GamePage = () => {
     const location = useLocation()
 
     useEffect(() => {
-        if (location?.state?.difficulty && location?.state?.username) {
+        if (location?.state) {
             getQuestions()
         }
     }, [])
@@ -66,7 +68,7 @@ const GamePage = () => {
             setCurrentQuestion(questions[questionNumber])
             setQuestionNumber(prevState => prevState + 1)
         } catch (error) {
-            console.error(error)
+            navigate("/finish", { state: { correctQuestions, username: location?.state?.username, totalQuestions: questions?.length, error }, replace: true })
         } finally {
             setLoading(false)
         }
@@ -79,7 +81,7 @@ const GamePage = () => {
             setOptionStyle(prevState => { return { ...prevState, backgroundColor: `${answerValidation.answer ? 'green' : 'red'}` }})
             if (answerValidation.answer) setCorrectQuestions(prevState => prevState + 1)
         } catch (error) {
-            console.error(error)
+            navigate("/finish", { state: { correctQuestions, username: location?.state?.username, totalQuestions: questions?.length, error }, replace: true })
         }
     }
 

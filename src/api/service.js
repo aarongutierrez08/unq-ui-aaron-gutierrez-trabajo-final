@@ -2,21 +2,26 @@ import axios from 'axios';
 
 const BASE_URL = 'https://preguntados-api.vercel.app'
 
+export const formatAxiosErrorMsg = (error) => {
+    return { error: error.response.data.error + ": try to play later" }
+}
+
 export const getDifficulty = async () => {
     try {
         const response = await axios.get(`${BASE_URL}/api/difficulty`)
         return response.data
     } catch (error) {
-        throw error
+        throw formatAxiosErrorMsg(error)
     }
 }
 
 export const getQuestionsByDifficulty = async ({ difficulty }) => {
     try {
-        const response = await axios.get(`${BASE_URL}/api/questions?difficulty=${difficulty}`)
+        const difficultyQueryParam = difficulty ? `?difficulty=${difficulty}` : ''
+        const response = await axios.get(`${BASE_URL}/api/questions${difficultyQueryParam}`)
         return response.data
     } catch (error) {
-        throw error
+        throw formatAxiosErrorMsg(error)
     }
 }
 
@@ -25,6 +30,6 @@ export const answerQuestion = async ({ questionId, option }) => {
         const response = await axios.post(`${BASE_URL}/api/answer`, { questionId, option })
         return response.data
     } catch (error) {
-        throw error
+        throw formatAxiosErrorMsg(error)
     }
 }

@@ -10,6 +10,7 @@ const PlayPage = () => {
     const location = useLocation()
     const [values, setValues] = useState({ username: `${location?.state?.username ? location?.state?.username : ''}` })
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState()
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -30,7 +31,7 @@ const PlayPage = () => {
             const difficulties = await getDifficulty()
             setDifficulties(difficulties)
         } catch (error) {
-            console.error(error)
+            setError(error)
         } finally {
             setLoading(false)
         }
@@ -59,11 +60,18 @@ const PlayPage = () => {
             </div>
             <div className="difficulties-container">
             <LoaderContainer showLoading={loading}>
-                {difficulties.map(difficulty => {
-                    return (
-                        <button className="difficulty" key={difficulty} type="submit" onClick={() => setDifficulty(difficulty)}>{difficulty}</button>
-                    )
-                })}
+
+                {error
+                    ? <div className="error-difficulties">Error getting difficulties, try again later</div>
+                    : 
+                        <>
+                            {difficulties.map(difficulty => {
+                                return (
+                                    <button className="difficulty" key={difficulty} type="submit" onClick={() => setDifficulty(difficulty)}>{difficulty}</button>
+                                )
+                            })}
+                        </>
+                }
             </LoaderContainer>
             </div>
         </form>

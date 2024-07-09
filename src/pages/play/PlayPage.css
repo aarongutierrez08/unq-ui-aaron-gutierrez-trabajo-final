@@ -38,11 +38,15 @@
     font-weight: bold;
 }
 
+.error-difficulties {
+    color: red;
+    font-size: 24px;
+}
+
 @media (max-width: 450px) {
     .choose {
         justify-content: flex-start;
         align-items: center;
-        font-size: 16px;
     }
 
     .choose input {
