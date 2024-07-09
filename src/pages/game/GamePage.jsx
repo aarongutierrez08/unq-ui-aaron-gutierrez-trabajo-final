@@ -107,7 +107,7 @@ const GamePage = () => {
         <div className="section-container">
             <div className="header">
                 <div className="user">User: <span>{location?.state?.username}</span></div>
-                <button className="exit-button" onClick={() => navigate("/play", { state: { username: location?.state?.username }, replace: true })}>Salir</button>
+                <button className="exit-button" onClick={() => navigate("/finish", { state: { correctQuestions, username: location?.state?.username, totalQuestions: questions?.length }, replace: true })}>Salir</button>
             </div>
             <div className="header-text-center">
                 <div className="difficulty-text">Difficulty: <span className="difficulty-chosen">{location?.state?.difficulty}</span></div>
