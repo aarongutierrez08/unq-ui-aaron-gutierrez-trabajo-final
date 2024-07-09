@@ -11,7 +11,7 @@ export const getDifficulty = async () => {
         const response = await axios.get(`${BASE_URL}/api/difficulty`)
         return response.data
     } catch (error) {
-        throw formatAxiosErrorMsg(error)
+        throw error?.response ? formatAxiosErrorMsg(error) : { error: 'An error has occurred'}
     }
 }
 
@@ -21,7 +21,7 @@ export const getQuestionsByDifficulty = async ({ difficulty }) => {
         const response = await axios.get(`${BASE_URL}/api/questions${difficultyQueryParam}`)
         return response.data
     } catch (error) {
-        throw formatAxiosErrorMsg(error)
+        throw error?.response ? formatAxiosErrorMsg(error) : { error: 'An error has occurred'}
     }
 }
 
@@ -30,6 +30,6 @@ export const answerQuestion = async ({ questionId, option }) => {
         const response = await axios.post(`${BASE_URL}/api/answer`, { questionId, option })
         return response.data
     } catch (error) {
-        throw formatAxiosErrorMsg(error)
+        throw error?.response ? formatAxiosErrorMsg(error) : { error: 'An error has occurred'}
     }
 }
